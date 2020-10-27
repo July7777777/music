@@ -1,0 +1,300 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+.bg {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: url("../img/bg2.jpg") no-repeat;
+  background-size: cover;
+  /* 模糊效果 */
+  filter: blur(3px);
+}
+
+#app {
+  width: 777px;
+  height: 480px;
+  background-color: rgb(255, 255, 255, 1);
+  /*开启元素相对于第一个父元素的定位*/
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  /* XY轴2D移动 修复此元素左上角在中心的问题*/
+  transform: translate(-50%, -50%);
+  /* 修角 */
+  border-top-left-radius: 2px;
+  border-top-right-radius: 2px;
+}
+
+.search_box {
+  width: 776px;
+  height: 57px;
+  border: 0.1px solid rgb(236, 65, 65);
+
+  /* 修角  左上和右上 */
+  border-top-left-radius: 2px;
+  border-top-right-radius: 2px;
+  background: url("../img/name9.png") 8px center no-repeat rgb(236, 65, 65);
+  background-size: 152px;
+}
+
+input {
+  width: 177px;
+  height: 31px;
+  border: 0;
+  /* 修角 */
+  border-radius: 25px;
+  /*定位*/
+  position: absolute;
+  top: 2.5%;
+  left: 47%;
+
+  /*字体样式*/
+  padding: 0 27px;
+  color: rgb(255, 255, 255);
+  font-size: 12px;
+
+  /*搜索图标*/
+  background: url("../img/search.png") 6px center no-repeat rgb(217, 59, 59);
+  background-size: 20px;
+
+  /*  去除选中状态时的边框 */
+  outline: none;
+}
+
+
+
+/* 歌单*/
+.music_list {
+  width: 172px;
+  height: 88%;
+  /* padding-left: 3px; */
+  /*溢出超出剪掉   这里会顺带把li前的原点也会剪掉(隐藏)  重要的是隐藏滚动条*/
+  overflow: hidden;
+
+  /* border: 1px solid rgb(225, 225, 225); */
+}
+
+/*歌词*/
+.lrc_div {
+  width: 55%;
+  height: 422px;
+  position: absolute;
+  top: 58px;
+  left: 22%;
+  border-left: 1px solid rgb(225, 225, 225);
+  border-right: 1px solid rgb(225, 225, 225);
+  overflow: hidden;
+
+}
+
+.lrc_ul {
+  width: 105%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  position: relative;
+  top: 20%;
+}
+
+.lrc_li {
+  /*去除黑点 */
+  list-style: none;
+  width: 95%;
+  /* height: 33px; */
+  text-align: center;
+  /*垂直居中*/
+  line-height: 33px;
+  /* margin-left: -3px; */
+  word-break: break-all;
+
+}
+
+/*评论框*/
+.music_comment {
+  width: 176px;
+  height: 88%;
+  position: absolute;
+  top: 58px;
+  left: 601px;
+  overflow: hidden;
+
+  /* background-color: aqua; */
+}
+
+
+.music_list_ul {
+  width: 120%;
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+
+.music_list_li {
+  /*去除黑点 */
+  list-style: none;
+  height: 33px;
+  width: 171px;
+  /*垂直居中*/
+  line-height: 33px;
+  /* margin-left: -3px; */
+}
+
+/*奇数li*/
+.music_list_li:nth-child(odd) {
+  background-color: rgba(249, 249, 249);
+}
+
+/*偶数li*/
+.music_list_li:nth-child(even) {
+  background-color: rgba(255, 255, 255);
+}
+
+/*鼠标移入*/
+.music_list_li:hover {
+  background-color: rgb(242, 242, 242)
+}
+
+/*歌名*/
+.music_list_li>a,
+p {
+  font-size: 13px;
+  /*去除超链接默认样式*/
+  text-decoration: none;
+  color: #333;
+  /*取消换行*/
+  white-space: nowrap;
+
+  /*自动隐藏文字*/
+  /* overflow: hidden; */
+  /*文字隐藏后添加省略号*/
+  /* text-overflow: ellipsis; */
+  /* width: 10px; */
+
+  /*超出部分省略号显示 上边的代码没用 看资料这样写有用*/
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  word-break: break-all;
+}
+
+a>p {
+  margin-top: -28px;
+  padding-left: 30px;
+}
+
+a>div {
+  width: 20px;
+  height: 20px;
+
+  margin-left: 7px;
+  margin-top: 6.5px;
+}
+
+.play {
+  background: url("../img/playing.png");
+  background-size: 100%;
+}
+
+.pause {
+  background: url("../img/pause.png");
+  background-size: 100%;
+}
+
+h3 {
+  width: 95%;
+  height: 33px;
+  line-height: 33px;
+  padding-left: 8px;
+  /* padding-top: 3px; */
+  background-color: rgb(242, 242, 242);
+}
+
+.audio_box {
+  height: 64px;
+  background: rgb(241, 243, 244);
+  margin-top: -1px;
+  /* position: absolute;
+  top: 100%;
+  left: 0%; */
+
+  /* 修角  左下和右下 */
+  border-bottom-left-radius: 2px;
+  border-bottom-right-radius: 2px;
+}
+
+.music_img {
+  width: 54px;
+  height: 54px;
+  position: absolute;
+  top: 485px;
+  left: 6px;
+  border-radius: 2px;
+}
+
+.music_maker,
+.music_name {
+  font-size: 13px;
+  width: 131px;
+  margin-left: 70px;
+  padding-top: 9px;
+  /*文字隐藏后添加省略号*/
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+}
+
+audio {
+  width: 582px;
+  position: absolute;
+  top: 101%;
+  left: 24%;
+  outline: none;
+}
+
+.comment_box {
+  width: 195px;
+  height: 421px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+dl {
+  width: 170px;
+  overflow: hidden;
+  padding: 3px;
+  background-color: rgba(249, 249, 249);
+  /* background-color: blue; */
+}
+
+/*偶数li*/
+dl:nth-child(even) {
+  background-color: rgba(255, 255, 255);
+}
+
+dt>img {
+  width: 47px;
+  height: 47px;
+  border-radius: 2px;
+}
+
+.name {
+  font-size: 13px;
+  position: relative;
+  top: -36px;
+  left: 55px;
+}
+
+.detail {
+  width: 100%;
+  margin-bottom: 20px;
+  margin-top: -14px;
+  font-size: 12px;
+  /*合适的地方换行-CSS3*/
+  word-break: break-all;
+}

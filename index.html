@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="./css/index.css">
+</head>
+
+<body>
+  <div class="bg"></div>
+  <div id="app">
+    <!-- 搜索框 -->
+    <div class="search_box">
+      <input type="text" autocomplete="off" v-model="mes" @keyup.enter="search">
+    </div>
+
+
+    <!-- 歌曲列表 -->
+    <div class="music_list">
+      <h3>歌曲列表</h3>
+
+      <ul class="music_list_ul">
+        <li class="music_list_li" v-for="(item,index) in music_list_arr">
+          <a href="javascript:;" @click="play(item.id,index)" />
+          <div :class="index==current?'play':'pause'"></div>
+          <p>
+            {{item.name}}
+          </p>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- 歌词 -->
+    <div class="lrc_div">
+      <ul class="lrc_ul" ref="lrc_ul">
+        <li class="lrc_li" style="font-size: 20px;"> {{music_name}}</li>
+        <li v-for="item in lrc_arr" class="lrc_li"> {{item.words}} </li>
+      </ul>
+
+    </div>
+
+    <!-- 评论 -->
+    <div class="music_comment">
+      <h3>歌曲评论</h3>
+      <div class="comment_box">
+        <dl v-for="item in hot_comments">
+          <dt><img :src="item.user.avatarUrl" onerror="this.src='person.png';" alt=""></dt>
+          <dd class="name">{{ item.user.nickname}}</dd>
+          <dd class="detail">{{ "&emsp;"+item.content}}</dd>
+        </dl>
+      </div>
+
+
+    </div>
+
+    <!-- 播放器 -->
+    <div class="audio_box">
+      <img class="music_img" :src="music_img_url" onerror="this.src='err.png';" alt="" />
+      <div class="music_name"> {{music_name}} </div>
+      <div class="music_maker">{{music_maker}} </div>
+      <audio :src="music_url" ref="audio" @timeupdate="timeUpdate" controls autoplay></audio>
+    </div>
+
+  </div>
+  <script src="./vue/vue.js"> </script>
+  <script src="./js/axios.min.js"> </script>
+  <script src="./js/index_music.js"> </script>
+</body>
+
+</html>
