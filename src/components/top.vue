@@ -1,18 +1,20 @@
 <template>
-  <div class="hello">
-    
+  <div id="top">
+    头部组件
+
   </div>
 </template>
 
 <script>
 export default {
-  name: 'HelloWorld',
   props: {
-    msg: String
-  }
-}
+    msg: String,
+  },
+};
 </script>
 
 <style scoped lang="less">
-
+#top{
+  height: 50px;
+}
 </style>

@@ -1,0 +1,17 @@
+<template>
+  <div class="Video">
+    Video视频内容
+    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  </div>
+</template>
+
+<script>
+import HelloWorld from '@/components/HelloWorld.vue'
+
+export default {
+  name: 'Video',
+  components: {
+    HelloWorld
+  }
+}
+</script>
