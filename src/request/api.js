@@ -7,6 +7,6 @@ import { get, post } from './http'
 export const Login = data => post('/api/TokenAuth/Login', data);
 
 // 搜索
-export const Search = data => get('/search', data);
+export const Search = data => post('/search', data);
 
 

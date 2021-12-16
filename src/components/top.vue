@@ -18,11 +18,13 @@ export default {
   },
   methods: {
     search() {
+      // this.$router.push({name:'Search'}) 
+      this.$router.push({path:'/Search'})
       console.log(this.input);
       let input = this.input;
       Search({ keywords:input })
         .then((res) => {
-          console.log(res);
+          console.log(res.result);
         })
         .catch((err) => {
           console.log(err);

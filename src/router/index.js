@@ -5,7 +5,7 @@ const routes = [
   {
     path: '/',
     name: 'PC_home',
-    redirect:'/Home',
+    redirect: '/Home',
     component: PC_home,
     children: [
       {
@@ -44,7 +44,10 @@ const routes = [
         path: '/My_Love',
         component: () => import('../views/My_Love.vue')
       },
-
+      {
+        path: '/Search',
+        component: () => import('../views/Search.vue')
+      },
     ]
   },
   // {
@@ -60,7 +63,7 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   // linkactiveclass: 'active',
-  linkActiveClass:'active',
+  linkActiveClass: 'active',
   routes
 })
 
