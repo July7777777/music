@@ -1,6 +1,6 @@
 <template>
   <div class="left">
-    <div class="link_box"><router-link class="link" to="/">发现音乐</router-link></div>
+    <div class="link_box"><router-link class="link" to="/Home" exact>发现音乐</router-link></div>
     <div class="link_box">
       <router-link class="link" to="/Podcast">播客</router-link>
     </div>
@@ -32,7 +32,7 @@
 
 <script>
 export default {
-  name: "HelloWorld",
+  name: "left",
   props: {
     msg: String,
   },
@@ -52,17 +52,25 @@ export default {
   width: 100%;
 }
 .link_box:hover{
-  background-color:rgb(107, 107, 107) ;
+  background-color:#F6F6F7 ;
+
 }
 .link {
   display: inline-block;
   width: 100%;
   font-family: "黑体";
   font-size: medium;
-  font-weight: bold;
   color: rgb(36, 36, 36);
 }
 
+
+.active {
+  // color: #3822ff;
+  background-color:#F6F6F7 ;
+  font-weight: bold;
+
+
+}
 a {
   color: #000;
 }

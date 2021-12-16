@@ -51,21 +51,24 @@ export default {
 #contont {
   position: absolute;
   width: 50vw;
+  min-width: 666px;
   height: 50vh;
   border-radius: 2px;
   overflow: hidden;
   background-color: antiquewhite;
-
+  #top{
+    background-color: #EC4141;
+  }
   .main {
     height: 100%;
     display: flex;
     height: calc(100% - 110px); //还要减去底部的高度
     #left {
-      width: 20%;
-      background-color: rgb(240, 158, 52);
+      width: 19.55%;
+      background-color: rgb(255, 255, 255);
     }
     #right {
-      width: 80%;
+      width: 80.45%;
       background-color: rgb(169, 210, 247);
     }
   }
