@@ -50,9 +50,10 @@ export default {
 }
 #contont {
   position: absolute;
-  width: 50vw;
+  width: 66.6vw;
+  height: 43.6vw;
   min-width: 666px;
-  height: 50vh;
+  min-height: 436.6px;
   border-radius: 2px;
   overflow: hidden;
   background-color: antiquewhite;
