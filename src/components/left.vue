@@ -1,31 +1,31 @@
 <template>
   <div class="left">
-    <div><router-link to="/">发现音乐</router-link></div>
-    <div>
-      <router-link to="/Podcast">播客</router-link>
+    <div class="link_box"><router-link class="link" to="/">发现音乐</router-link></div>
+    <div class="link_box">
+      <router-link class="link" to="/Podcast">播客</router-link>
     </div>
-    <div>
-      <router-link to="/Video">视频</router-link>
+    <div class="link_box">
+      <router-link class="link" to="/Video">视频</router-link>
     </div>
-    <div>
-      <router-link to="/Friends">朋友</router-link>
+    <div class="link_box">
+      <router-link class="link" to="/Friends">朋友</router-link>
     </div>
-    <div>
-      <router-link to="/LiveStream">直播</router-link>
+    <div class="link_box">
+      <router-link class="link" to="/LiveStream">直播</router-link>
     </div>
-    <div>
-      <router-link to="/FM">私人FM</router-link>
+    <div class="link_box">
+      <router-link class="link" to="/FM">私人FM</router-link>
     </div>
-    <div>我的音乐</div>
-    <div>
-      <router-link to="/Download">本地与下载</router-link>
+    <div class="title">我的音乐</div>
+    <div class="link_box">
+      <router-link class="link" to="/Download">本地与下载</router-link>
     </div>
-    <div>
-      <router-link to="/Recently_Played">最近播放</router-link>
+    <div class="link_box">
+      <router-link class="link" to="/Recently_Played">最近播放</router-link>
     </div>
-    <div>创建的歌单</div>
-    <div>
-      <router-link to="/My_Love">私人FM</router-link>
+    <div class="title">创建的歌单</div>
+    <div class="link_box">
+      <router-link class="link" to="/My_Love">我喜欢的音乐</router-link>
     </div>
   </div>
 </template>
@@ -43,6 +43,26 @@ export default {
 #left {
   width: 100%;
 }
+.title {
+  font-family: "黑体";
+  font-size: small;
+  color: rgb(107, 107, 107);
+}
+.link_box{
+  width: 100%;
+}
+.link_box:hover{
+  background-color:rgb(107, 107, 107) ;
+}
+.link {
+  display: inline-block;
+  width: 100%;
+  font-family: "黑体";
+  font-size: medium;
+  font-weight: bold;
+  color: rgb(36, 36, 36);
+}
+
 a {
   color: #000;
 }
