@@ -1,7 +1,6 @@
 <template>
   <div class="home">
     home主页内容
-    
   </div>
 </template>
 
