@@ -16,7 +16,8 @@
       </div>
       <div id="right">
         <!-- 右侧路由展示区域 -->
-        <router-view />
+        <!-- <router-view v-if="isRouterAlive" @reload="reload" /> -->
+        <router-view  />
       </div>
     </div>
 
@@ -28,6 +29,14 @@
 import top from "@/components/top.vue";
 import left from "@/components/left.vue";
 import bottom from "@/components/bottom.vue";
+import {
+  reactive,
+  onMounted,
+  defineComponent,
+  toRefs,
+  watch,
+  nextTick,
+} from "vue";
 
 export default {
   name: "PC_home",
@@ -35,6 +44,22 @@ export default {
     top,
     left,
     bottom,
+  },
+  setup() {
+    let data = reactive({
+      // isRouterAlive: true,
+    });
+    // let reload = () => {
+    //   data.isRouterAlive = false;
+    //   nextTick(function () {
+    //     data.isRouterAlive = true;
+    //   });
+    // };
+
+    return {
+      ...toRefs(data),
+      // reload,
+    };
   },
 };
 </script>
@@ -57,8 +82,8 @@ export default {
   border-radius: 2px;
   overflow: hidden;
   background-color: antiquewhite;
-  #top{
-    background-color: #EC4141;
+  #top {
+    background-color: #ec4141;
   }
   .main {
     height: 100%;

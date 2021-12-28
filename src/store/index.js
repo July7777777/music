@@ -6,6 +6,7 @@ export default createStore({
   },
   mutations: {
     searchResultList_c(state, param){
+      console.log('param',param)
       state.searchResultList = param
     }
   },
