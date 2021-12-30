@@ -7,9 +7,8 @@
 
 
 <script>
-import { Search } from "../request/api";
 import { useStore } from "vuex";
-import { reactive, nextTick, onMounted, defineComponent, toRefs } from "vue";
+import { reactive,  onMounted, defineComponent, toRefs } from "vue";
 import { useRouter } from "vue-router";
 
 export default defineComponent({
@@ -26,23 +25,26 @@ export default defineComponent({
     //   console.log("useStore", store.state.searchResultList);
     // });
     let search = () => {
-      console.log(router);
-      console.log(data);
-      let param = { keywords: data.input, timestamp: Date.parse(new Date()) };
-      Search(param)
-        .then((res) => {
-          console.log(res.result);
-          console.log(store);
-          let searchResultList = res.result;
-          store.commit("searchResultList_c", searchResultList);
-          console.log(router.currentRoute.value.fullPath);
-          // if(router.currentRoute.value.fullPath!="/Search"){
-          //   }
-          router.push({ path: "/Search"});
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      router.push({ path: "/Search" });
+      store.commit("changeState", { name: "searchInfo", value: data.input });
+      // store.commit("searchList");
+      store.dispatch('searchList')
+      // let param = { keywords: data.input, timestamp: Date.parse(new Date()) };
+      // Search(param)
+      //   .then((res) => {
+      //     console.log(res.result);
+      //     console.log(store);
+      //     let searchResultList = res.result;
+      //     store.commit("searchResultList_c", searchResultList);
+      //     console.log(router.currentRoute.value.fullPath);
+      //     // if(router.currentRoute.value.fullPath!="/Search"){
+      //     //   }
+      //     router.push({ path: "/Search" });
+      //   })
+      //   .catch((err) => {
+      //     console.log(err);
+      //   });
+      // router.push({ path: "/Search" });
     };
     return {
       ...toRefs(data),

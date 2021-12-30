@@ -4,9 +4,9 @@
 import { get, post } from './http'
 
 // 登录
-export const Login = data => post('/api/TokenAuth/Login', data);
+// export const Login = data => post('/api/TokenAuth/Login', data);
 
-// 搜索
-export const Search = data => post('/search', data);
+
+export const SearchList = data => post('/search', data);// 搜索 单曲
 
 

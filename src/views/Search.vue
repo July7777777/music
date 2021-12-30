@@ -1,11 +1,37 @@
 <template>
   <div class="Search">
-    搜索展示区域
-    <div class="showarea" v-for="item in store.state.searchResultList.songs" :key="item.id">
-      <p id="id">id:{{ item.id }}</p>
-      <p>mark:{{ item.mark }}</p>
-      <p>name:{{ item.name }}</p>
-      <p>mvid:{{ item.mvid }}</p>
+    <div>找到</div>
+    <div id="link">
+      <div class="link_box">
+        <router-link class="link" to="/Search/list">单曲</router-link>
+      </div>
+      <div class="link_box">
+        <router-link class="link" to="/Search/singer">歌手</router-link>
+      </div>
+      <div class="link_box">
+        <router-link class="link" to="/Search/album">专辑</router-link>
+      </div>
+      <div class="link_box">
+        <router-link class="link" to="/Search/video">视频</router-link>
+      </div>
+      <div class="link_box">
+        <router-link class="link" to="/Search/playlist">歌单</router-link>
+      </div>
+      <div class="link_box">
+        <router-link class="link" to="/Search/lyric">歌词</router-link>
+      </div>
+      <div class="link_box">
+        <router-link class="link" to="/Search/podcast">播客</router-link>
+      </div>
+      <div class="link_box">
+        <router-link class="link" to="/Search/voice">声音</router-link>
+      </div>
+      <div class="link_box">
+        <router-link class="link" to="/Search/user">用户</router-link>
+      </div>
+    </div>
+    <div>
+      <router-view></router-view>
     </div>
   </div>
 </template>
@@ -17,7 +43,7 @@ import {
   defineComponent,
   toRefs,
   watch,
-  router
+  router,
 } from "vue";
 import { useRouter } from "vue-router";
 
@@ -25,20 +51,18 @@ import { useStore } from "vuex";
 export default defineComponent({
   name: "Search",
   components: {},
-  setup(props,context) {
+  setup(props, context) {
     let router = useRouter();
     let store = useStore();
-    
+
     let data = reactive({
       input: "",
-      reload:false
+      reload: false,
     });
-    onMounted(() => {
-
-    });
+    onMounted(() => {});
     return {
       ...toRefs(data),
-      store
+      store,
     };
   },
 });
@@ -47,5 +71,24 @@ export default defineComponent({
 .Search {
   height: 100%;
   overflow-y: scroll;
+}
+#link {
+  display: flex;
+  flex-direction: row;
+  background-color: antiquewhite;
+  .link_box {
+    margin: 10px 20px;
+  }
+}
+.showarea {
+  width: 100%;
+  background-color: aquamarine;
+  p {
+    display: inline-flex;
+  }
+  .name {
+    background-color: rgba(127, 187, 255, 0.616);
+    width: 100px;
+  }
 }
 </style>

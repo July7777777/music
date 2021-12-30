@@ -46,7 +46,38 @@ const routes = [
       },
       {
         path: '/Search',
-        component: () => import('../views/Search.vue')
+        redirect: '/Search/list',
+        component: () => import('../views/Search.vue'),
+        children: [
+          {
+            path: '/Search/album',
+            component: () => import('../components/search/music_album.vue')
+          }, {
+            path: '/Search/list',
+            component: () => import('../components/search/music_list.vue')
+          }, {
+            path: '/Search/lyric',
+            component: () => import('../components/search/music_lyric.vue')
+          }, {
+            path: '/Search/playlist',
+            component: () => import('../components/search/music_playlist.vue')
+          }, {
+            path: '/Search/singer',
+            component: () => import('../components/search/music_singer.vue')
+          }, {
+            path: '/Search/video',
+            component: () => import('../components/search/music_video.vue')
+          }, {
+            path: '/Search/podcast',
+            component: () => import('../components/search/music_podcast.vue')
+          }, {
+            path: '/Search/voice',
+            component: () => import('../components/search/music_voice.vue')
+          }, {
+            path: '/Search/user',
+            component: () => import('../components/search/music_user.vue')
+          },
+        ]
       },
     ]
   },

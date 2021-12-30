@@ -53,7 +53,6 @@ export default {
 }
 .link_box:hover{
   background-color:#F6F6F7 ;
-
 }
 .link {
   display: inline-block;
