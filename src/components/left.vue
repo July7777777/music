@@ -1,6 +1,8 @@
 <template>
   <div class="left">
-    <div class="link_box"><router-link class="link" to="/Home" exact>发现音乐</router-link></div>
+    <div class="link_box">
+      <router-link class="link" to="/Home" exact>发现音乐</router-link>
+    </div>
     <div class="link_box">
       <router-link class="link" to="/Podcast">播客</router-link>
     </div>
@@ -40,7 +42,7 @@ export default {
 </script>
 
 <style scoped lang="less">
-#left {
+.left {
   width: 100%;
 }
 .title {
@@ -48,11 +50,11 @@ export default {
   font-size: small;
   color: rgb(107, 107, 107);
 }
-.link_box{
+.link_box {
   width: 100%;
 }
-.link_box:hover{
-  background-color:#F6F6F7 ;
+.link_box:hover {
+  background-color: #f6f6f7;
 }
 .link {
   display: inline-block;
@@ -62,13 +64,14 @@ export default {
   color: rgb(36, 36, 36);
 }
 
-
+.title,
+a {
+  padding: 5px 0 5px 10px;
+}
 .active {
   // color: #3822ff;
-  background-color:#F6F6F7 ;
+  background-color: #f6f6f7;
   font-weight: bold;
-
-
 }
 a {
   color: #000;
@@ -76,4 +79,5 @@ a {
 a:hover {
   text-decoration: none;
 }
+
 </style>

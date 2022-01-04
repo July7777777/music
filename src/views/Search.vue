@@ -1,6 +1,6 @@
 <template>
   <div class="Search">
-    <div>找到</div>
+    <h1>搜索 {{store.state.searchInfo}}</h1>
     <div id="link">
       <div class="link_box" @click="search(1)">
         <router-link class="link" to="/Search/list">单曲</router-link>
@@ -67,8 +67,10 @@ export default defineComponent({
       // store.commit("changeState", { name: "searchInfo", value: data.input });
 
       console.log(e);
-      console.log(store.state.searchInfo)
-      e.length!=0&&store.state.searchInfo.length!=0?store.dispatch("search", { type: e }):'';
+      console.log(store.state.searchInfo);
+      e.length != 0 && store.state.searchInfo.length != 0
+        ? store.dispatch("search", { type: e })
+        : "";
       // let param = { keywords: data.input, timestamp: Date.parse(new Date()) };
       // Search(param)
       //   .then((res) => {
@@ -89,6 +91,7 @@ export default defineComponent({
     return {
       ...toRefs(data),
       search,
+      store
     };
   },
 });
@@ -97,11 +100,11 @@ export default defineComponent({
 .Search {
   height: 100%;
   overflow-y: scroll;
+  background-color: #fff;
 }
 #link {
   display: flex;
   flex-direction: row;
-  background-color: antiquewhite;
   .link_box {
     margin: 10px 20px;
   }
@@ -113,8 +116,19 @@ export default defineComponent({
     display: inline-flex;
   }
   .name {
-    background-color: rgba(127, 187, 255, 0.616);
     width: 100px;
   }
+}
+
+a {
+  white-space:nowrap;
+  color: #000;
+}
+a:hover {
+  text-decoration: none;
+}
+.active{
+  color: #373737;
+  font-weight: bold;
 }
 </style>

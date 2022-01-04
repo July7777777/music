@@ -26,27 +26,7 @@ export default defineComponent({
     let search = () => {
       router.push({ path: "/Search" });
       store.commit("changeState", { name: "searchInfo", value: data.input });
-      let param={
-        type:'1'
-      }
-      // store.commit("Search");
-      store.dispatch('search',param)
-      // let param = { keywords: data.input, timestamp: Date.parse(new Date()) };
-      // Search(param)
-      //   .then((res) => {
-      //     console.log(res.result);
-      //     console.log(store);
-      //     let searchResultList = res.result;
-      //     store.commit("searchResultList_c", searchResultList);
-      //     console.log(router.currentRoute.value.fullPath);
-      //     // if(router.currentRoute.value.fullPath!="/Search"){
-      //     //   }
-      //     router.push({ path: "/Search" });
-      //   })
-      //   .catch((err) => {
-      //     console.log(err);
-      //   });
-      // router.push({ path: "/Search" });
+      store.dispatch('search',{type:'1'})
     };
     return {
       ...toRefs(data),
@@ -59,5 +39,9 @@ export default defineComponent({
 <style scoped lang="less">
 #top {
   height: 50px;
+}
+input{
+  border: none;
+  outline: none;
 }
 </style>

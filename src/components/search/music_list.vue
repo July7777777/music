@@ -1,6 +1,5 @@
 <template>
   <div class="list">
-    <h1>单曲</h1>
     <div
       class="showarea"
       v-for="item in store.state.searchResult.songs"
@@ -23,7 +22,7 @@ export default defineComponent({
   name: "list",
   setup(props) {
     let data = reactive({
-      listArr: ""
+      listArr: "",
     });
     let store = useStore();
     let router = useRouter();
@@ -31,21 +30,25 @@ export default defineComponent({
     return {
       ...toRefs(data),
       store,
-    }
-  }
+    };
+  },
 });
 </script>
 
 <style lang="less" scoped>
 .showarea {
   width: 100%;
-  background-color: aquamarine;
   p {
     display: inline-flex;
   }
   .name {
-    background-color: rgba(127, 187, 255, 0.6);
     width: 100px;
   }
+}
+.showarea:nth-child(even) {
+  background: #fff;
+}
+.showarea:nth-child(odd) {
+  background: #f9f9f9;
 }
 </style>
