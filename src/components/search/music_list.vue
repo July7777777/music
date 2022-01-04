@@ -3,7 +3,7 @@
     <h1>单曲</h1>
     <div
       class="showarea"
-      v-for="item in store.state.searchListResult.songs"
+      v-for="item in store.state.searchResult.songs"
       :key="item.id"
     >
       <p class="name">{{ item.name }}</p>

@@ -28,7 +28,7 @@ export default {
   //   msg: String,
 
   // },
-  props: ["url"],
+  // props: ["url"],
 
   data() {
     return {

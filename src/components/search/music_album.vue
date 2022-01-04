@@ -1,33 +1,49 @@
 <template>
   <div class="album">
     <h1>专辑</h1>
+    <div
+      class="showarea"
+      v-for="item in store.state.searchResult.albums"
+      :key="item.id"
+    >
+      <p class="name">{{ item.name }}</p>
+      <p id="">id:{{ item.id }}</p>
+      <p id="">type:{{ item.type }}</p>
+
+    </div>
   </div>
 </template>
 <script>
-// import { Search } from "../request/api";
 import { useStore } from "vuex";
-import { reactive, nextTick, onMounted, defineComponent, toRefs } from "vue";
-import { useRouter } from "vue-router";
+import { reactive, onMounted, defineComponent, toRefs } from "vue";
 
 export default defineComponent({
-  name: "list",
+  name: "album",
   setup(props) {
     let data = reactive({
-      input: "",
       store: "",
     });
     let store = useStore();
-    let router = useRouter();
-    // onMounted(() => {
-    //   console.log('1111')
-    //   console.log("useStore", store.state.searchResultList);
-    // });
-    
+    onMounted(() => {
+      console.log("专辑");
+    });
     return {
       ...toRefs(data),
+      store
     };
   },
 });
 </script>
 <style lang="less" scoped>
+.showarea {
+  width: 100%;
+  background-color: aquamarine;
+  p {
+    display: inline-flex;
+  }
+  .name {
+    background-color: rgba(127, 187, 255, 0.6);
+    width: 100px;
+  }
+}
 </style>

@@ -12,11 +12,10 @@ import { reactive,  onMounted, defineComponent, toRefs } from "vue";
 import { useRouter } from "vue-router";
 
 export default defineComponent({
-  name: "Search",
+  name: "top",
   setup(props) {
     let data = reactive({
       input: "",
-      store: "",
     });
     let store = useStore();
     let router = useRouter();
@@ -27,8 +26,11 @@ export default defineComponent({
     let search = () => {
       router.push({ path: "/Search" });
       store.commit("changeState", { name: "searchInfo", value: data.input });
-      // store.commit("searchList");
-      store.dispatch('searchList')
+      let param={
+        type:'1'
+      }
+      // store.commit("Search");
+      store.dispatch('search',param)
       // let param = { keywords: data.input, timestamp: Date.parse(new Date()) };
       // Search(param)
       //   .then((res) => {

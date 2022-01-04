@@ -7,6 +7,7 @@ import { get, post } from './http'
 // export const Login = data => post('/api/TokenAuth/Login', data);
 
 
-export const SearchList = data => post('/search', data);// 搜索 单曲
+export const Search = data => post('/search', data);// 搜索 单曲
+
 
 
