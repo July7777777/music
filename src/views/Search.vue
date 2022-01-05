@@ -106,7 +106,7 @@ export default defineComponent({
   display: flex;
   flex-direction: row;
   .link_box {
-    margin: 10px 20px;
+    margin:6px 10px ;
   }
 }
 .showarea {

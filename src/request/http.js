@@ -52,7 +52,7 @@ axios.interceptors.response.use(
 	},
 	// 服务器状态码不是200的情况    
 	error => {
-		console.log('error',error)
+		console.log('error',error.response)
 		// if (error.response.status == 401) {
 		// 	message.warning('请先登录')
 		// 	router.push({
@@ -61,7 +61,7 @@ axios.interceptors.response.use(
 		// }
 		const msg = error.Message !== undefined ? error.Message : ''
 		// console.log("网络错误：", msg)
-		return Promise.reject(error);
+		return Promise.reject(error.response);
 
 	}
 
@@ -83,7 +83,7 @@ export function get(url, params) {
 				resolve(res.data);
 			})
 			.catch(err => {
-				reject(err)
+				reject(err.data)
 			})
 	});
 }

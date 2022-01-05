@@ -9,7 +9,7 @@ export default createStore({
     searchInfo: '',//搜索信息  input
     searchType: '',//搜索类型  type
     searchResult: "",//搜索    list结果
-
+    MusicUrlInfo:"",//音乐播放地址
 
   },
   mutations: {
