@@ -9,7 +9,7 @@ export default createStore({
     searchInfo: '',//搜索信息  input
     searchType: '',//搜索类型  type
     searchResult: "",//搜索    list结果
-    MusicUrlInfo:"",//音乐播放地址
+    MusicUrlInfo: "",//音乐播放地址
 
   },
   mutations: {
@@ -17,11 +17,11 @@ export default createStore({
     changeState(state, param) {//修改任意一个state中的值
       state[param.name] = param.value
     },
-
+   
 
   },
   actions: {
-    search(context,E) {//单曲搜索
+    search(context, E) {//单曲搜索
       console.log(context)
       console.log(E)
 
@@ -32,6 +32,7 @@ export default createStore({
       let param = {
         keywords: state.searchInfo,
         type: E.type,
+        limit: '100',
         timestamp: Date.parse(new Date())
       };
       Search(param)
