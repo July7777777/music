@@ -7,9 +7,10 @@
       @dblclick="dblclick(item)"
     >
       <p class="name">{{ item.name }}</p>
-      <p id="">id:{{ item.id }}</p>
-      <p>mark:{{ item.mark }}</p>
-      <p>mvid:{{ item.mvid }}</p>
+      <p>歌手{{ item.artists[0].name }}</p>
+      <p>专辑{{ item.album.name }}</p>
+      <p>时长（毫秒）{{ item.duration }}</p>
+     
     </div>
   </div>
 </template>
@@ -79,10 +80,13 @@ export default defineComponent({
   -ms-user-select: none;
   user-select: none;
   p {
-    display: inline-flex;
+    // display: inline-flex;
+    overflow: hidden;
+    display: inline-block;
+    white-space: nowrap;
   }
   .name {
-    width: 100px;
+    width: 188px;
   }
 }
 .showarea:nth-child(even) {

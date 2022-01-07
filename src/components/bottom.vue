@@ -9,11 +9,12 @@
     <span class="tsp-audio" :class="{ playing: status == 1 }">
       <audio
         width="100%"
-        ref="audio"
+        ref=""
         onload="test"
         class="audio"
-        :src="url"
-        controls="controls"
+        autoplay
+        :src="store.state.MusicUrlInfo.url"
+        controls
       >
         浏览器不支持录音播放
       </audio>
@@ -22,32 +23,26 @@
 </template>
 
 <script>
-export default {
+import {   } from "@/request/api";
+import { useStore } from "vuex";
+import { reactive,  onMounted, defineComponent, toRefs } from "vue";
+import { useRouter } from "vue-router";
+
+export default defineComponent({
   name: "bottom",
-  // props: {
-  //   msg: String,
+  setup(props) {
+    let data = reactive({
+      // listArr: "",
+    });
+    let store = useStore();
+    let router = useRouter();
 
-  // },
-  // props: ["url"],
-
-  data() {
     return {
-      status: 0, // 0 pause, 1 play
-      url: "https://webfs.ali.kugou.com/202112161500/cbecb22c979809ccd1a54f6206810536/G176/M05/1F/19/8A0DAF3LyviAenTVACG3QGSRe1k906.mp3",
+      ...toRefs(data),
+      store,
     };
   },
-  mounted() {
-    var self = this;
-    let audio = this.$refs.audio;
-    new MediaElementPlayer(audio);
-    audio.addEventListener("play", function (e) {
-      self.status = 1;
-    });
-    audio.addEventListener("pause", function (e) {
-      self.status = 0;
-    });
-  },
-};
+});
 </script>
 
 <style scoped lang="less">
