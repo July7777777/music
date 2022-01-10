@@ -1,22 +1,43 @@
 <template>
   <div class="list">
     <div class="showarea">
-      <span>
+      <p class="index"></p>
+      <p class="name top_title">音乐标题</p>
+      <p class="ar top_title">歌手</p>
+      <p class="al top_title">专辑</p>
+      <p class="dt top_title">时长</p>
+      <p class="pop_bg top_title">热度</p>
+
+      <!-- <span>
         <p class="index"></p>
       </span>
       <p class="name">音乐标题</p>
       <p class="ar">歌手</p>
       <p class="al">专辑</p>
-      <p class="dt">时长</p>
-      <p class="pop">热度</p>
+      <p class="dt">时长</p> -->
+      <!-- <p class="pop">热度</p> -->
+      <!-- <div class="pop_boxx">热度</div> -->
     </div>
     <div
-      class="showarea"
+      :class="['showarea', bg_flag == item.id ? 'click_bg' : '']"
       v-for="(item, index) in store.state.searchResult.songs"
       :key="item.id"
-      @dblclick="dblclick(item)"
+      @click="bg_flag = item.id"
+      @dblclick="dblclick(item, item.id)"
     >
-      <span>
+      <p class="index">{{ index + 1 }}</p>
+      <p class="name">{{ item.name }}</p>
+      <p class="ar">{{ item.ar[0].name }}</p>
+      <p class="al">{{ item.al.name }}</p>
+      <p class="dt">{{ dateFormat(item.dt) }}</p>
+      <div class="pop_box">
+        <p
+          class="pop_p"
+          :style="{ width: item.pop == null ? '0' : item.pop + '%' }"
+        ></p>
+      </div>
+
+      <!-- <span>
         <p class="index">
           {{ index + 1 }}
         </p>
@@ -25,8 +46,13 @@
       <p class="ar">{{ item.ar[0].name }}</p>
       <p class="al">{{ item.al.name }}</p>
       <p class="dt">{{ dateFormat(item.dt) }}</p>
-      <!-- store.commit('increment',{'MM-SS',item.dt}) -->
-      <p class="pop">{{ item.pop }}</p>
+
+      <div class="pop_box">
+        <p
+          class="pop_p"
+          :style="{ width: item.pop == null ? '0' : item.pop + '%' }"
+        ></p>
+      </div> -->
     </div>
   </div>
 </template>
@@ -41,20 +67,25 @@ export default defineComponent({
   setup(props) {
     let data = reactive({
       // listArr: "",
+      value5: 80,
+      bg_flag: "",
     });
     let store = useStore();
     let router = useRouter();
-    let dblclick = (e) => {
+    let s_click = (e) => {
+      console.log(e);
+    };
+    let dblclick = (e, id) => {
       console.log("我双击了");
       console.log(e);
       console.log(e.id);
       console.log(e.name);
+      data.bg_flag = id;
       let param = {
         id: e.id,
         // br: //码率,默认设置了 999000 即最大码率,如果要 320k 则可设置为 320000,其他类推
       };
       onMounted(() => {
-        
         // store.commit("increment", "MM:SS", 188000);
       });
 
@@ -129,6 +160,7 @@ export default defineComponent({
     // };
     return {
       ...toRefs(data),
+      s_click,
       dblclick,
       dateFormat,
       store,
@@ -139,6 +171,7 @@ export default defineComponent({
 
 <style lang="less" scoped>
 .showarea {
+  display: flex;
   width: 100%;
   // 文字禁止选中
   -webkit-user-select: none;
@@ -151,32 +184,74 @@ export default defineComponent({
     overflow: hidden;
     display: inline-block;
     white-space: nowrap;
+    text-overflow: ellipsis;
   }
   .index {
     text-align: center;
     width: 30px;
+    padding: 5px 0;
   }
   .name {
+    flex-grow: 3;
     width: 120px;
+    padding: 5px 0;
   }
   .ar,
   .al,
   .dt,
   .pop {
+    flex-grow: 1;
     width: 90px;
     overflow: hidden;
     display: inline-block;
     white-space: nowrap;
     margin: 0 4px;
+    padding: 5px 0;
   }
   .dt {
-    width: 70px;
+    width: 50px;
+    flex-grow: 0;
   }
 }
+.top_title {
+  color: #373737;
+}
+.pop_box {
+  position: relative;
+  top: 10px;
+  // flex-grow: 2;
+  margin: 5px 4px;
+
+  width: 70px;
+  height: 4px;
+  border-radius: 4px;
+  background-color: #dfdfdf;
+}
+
+.pop_p {
+  position: absolute;
+  // top: 10px;
+  height: 100%;
+  border-radius: 4px;
+  background-color: #c8c8c8;
+}
+.pop_bg {
+  margin: 0 4px;
+  padding: 5px 0;
+  background-color: none;
+  // flex-grow: 2;
+  width: 70px;
+}
+
 .showarea:nth-child(even) {
   background: #fff;
 }
 .showarea:nth-child(odd) {
   background: #f9f9f9;
+}
+.list {
+  .click_bg {
+    background-color: #e5e5e5;
+  }
 }
 </style>
