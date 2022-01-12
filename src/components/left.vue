@@ -43,10 +43,9 @@ export default {
 
 <style scoped lang="less">
 .left {
-  width: 100%;
+  width: 150px;
 }
 .title {
-  font-family: "黑体";
   font-size: small;
   color: rgb(107, 107, 107);
 }
@@ -59,14 +58,13 @@ export default {
 .link {
   display: inline-block;
   width: 100%;
-  font-family: "黑体";
   font-size: medium;
   color: rgb(36, 36, 36);
 }
 
 .title,
 a {
-  padding: 5px 0 5px 10px;
+  padding: 5px 0 5px 20px;
 }
 .active {
   // color: #3822ff;
@@ -80,4 +78,10 @@ a:hover {
   text-decoration: none;
 }
 
+input,
+p,
+div,
+a {
+  font-family: "微软雅黑", Courier, monospace;
+}
 </style>

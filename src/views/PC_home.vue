@@ -75,8 +75,8 @@ export default {
 }
 #contont {
   position: absolute;
-  width: 50vw;
-  height: 32vw;
+  width: 60vw;
+  height: 37.08vw;
   min-width: 666px;
   min-height: 436.6px;
   border-radius: 2px;
@@ -89,13 +89,12 @@ export default {
     display: flex;
     height: calc(100% - 110px); //还要减去底部的高度
     #left {
-      width: 19.55%;
       background-color: rgb(255, 255, 255);
       overflow: hidden;
       overflow-y: scroll;
     }
     #right {
-      width: 80.45%;
+      flex-grow: 1;
       background-color: #fff;
     }
   }
@@ -109,7 +108,6 @@ export default {
 // 6. ::-webkit-scrollbar-corner 边角
 // 7. ::-webkit-resizer 定义右下角拖动块的样式
 
-
 // 全局滚动条样式
 ::-webkit-scrollbar {
   width: 5px;
@@ -117,9 +115,9 @@ export default {
 }
 ::-webkit-scrollbar-thumb {
   border-radius: 5px;
-  background: #E0E0E0;
+  background: #e0e0e0;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background-color: #D3D3D3;
+  background-color: #d3d3d3;
 }
 </style>
