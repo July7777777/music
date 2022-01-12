@@ -18,13 +18,20 @@
         </div>
       </div>
     </div>
-    <div id="right" class="flex">
+    <div id="right" class="flex pointer">
       <div id="login" class="flex">
-        <div id="handsame">
-          <img :src="webHender ? webHender : locHender" alt="" />
-        </div>
-        <div>
+        <div class="flex" @click="login">
+          <div id="handsame">
+            <img :src="webHender ? webHender : locHender" alt="" />
+          </div>
           <p id="userName">{{ userName ? userName : "未登录" }}</p>
+          <div id="triangle_size">
+            <img src="../assets/img/re_triangle.png" alt="" />
+          </div>
+        </div>
+
+        <div id="vip" @click="vip">
+          <img src="../assets/img/vip.png" alt="" />
         </div>
       </div>
     </div>
@@ -44,6 +51,7 @@ export default defineComponent({
       input: "",
       locHender: require("../assets/img/handsame.png"),
       webHender: "",
+      userName: "",
     });
     let store = useStore();
     let router = useRouter();
@@ -51,15 +59,24 @@ export default defineComponent({
     //   console.log('1111')
     //   console.log("useStore", store.state.searchResultList);
     // });
-    let icon_click = () => {};
+
+    // let icon_click = () => {};
     let search = () => {
       router.push({ path: "/Search" });
       store.commit("changeState", { name: "searchInfo", value: data.input });
       store.dispatch("search", { type: "1" });
     };
+    let login = () => {
+      console.log("dl");
+    };
+    let vip = () => {
+      console.log("vip");
+    };
     return {
       ...toRefs(data),
       search,
+      login,
+      vip,
     };
   },
 });
@@ -122,7 +139,15 @@ export default defineComponent({
       }
       #userName {
         color: #fbd9d9;
-        margin: 0 10px;
+        margin: 0 5px;
+      }
+      #triangle_size {
+        width: 10px;
+        margin: 0 5px;
+      }
+      #vip {
+        width: 60px;
+        margin: 0 5px;
       }
     }
   }
@@ -148,5 +173,9 @@ div,
 a {
   font-family: "微软雅黑", Courier, monospace;
   font-size: 13px;
+}
+
+.pointer {
+  cursor: pointer;
 }
 </style>

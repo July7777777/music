@@ -6,26 +6,24 @@
         src="https://webfs.ali.kugou.com/202112161500/cbecb22c979809ccd1a54f6206810536/G176/M05/1F/19/8A0DAF3LyviAenTVACG3QGSRe1k906.mp3"
       ></audio>
     </div> -->
-    <span class="tsp-audio" :class="{ playing: status == 1 }">
-      <audio
-        width="100%"
-        ref=""
-        onload="test"
-        class="audio"
-        autoplay
-        :src="store.state.MusicUrlInfo.url"
-        controls
-      >
-        浏览器不支持录音播放
-      </audio>
-    </span>
+    <audio
+      width="100%"
+      ref=""
+      onload="test"
+      class="audio"
+      autoplay
+      :src="store.state.MusicUrlInfo.url"
+      controls
+    >
+      浏览器不支持录音播放
+    </audio>
   </div>
 </template>
 
 <script>
-import {   } from "@/request/api";
+import {} from "@/request/api";
 import { useStore } from "vuex";
-import { reactive,  onMounted, defineComponent, toRefs } from "vue";
+import { reactive, onMounted, defineComponent, toRefs } from "vue";
 import { useRouter } from "vue-router";
 
 export default defineComponent({
