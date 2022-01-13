@@ -1,6 +1,10 @@
 <template>
   <div class="bg"></div>
   <!-- b背景图 -->
+  <div id="login" class="12313213" v-if="store.state.loginState">
+    <!-- 登录位置 -->
+    <login />
+  </div>
 
   <div id="contont">
     <div id="top">
@@ -10,10 +14,12 @@
 
     <div class="main">
       <!-- 主体 -->
+
       <div id="left">
         <!-- 左侧路由 -->
         <left />
       </div>
+
       <div id="right">
         <!-- 右侧路由展示区域 -->
         <!-- <router-view v-if="isRouterAlive" @reload="reload" /> -->
@@ -29,6 +35,9 @@
 import top from "@/components/top.vue";
 import left from "@/components/left.vue";
 import bottom from "@/components/bottom.vue";
+import login from "@/components/login.vue";
+
+import { useStore } from "vuex";
 import {
   reactive,
   onMounted,
@@ -44,11 +53,14 @@ export default {
     top,
     left,
     bottom,
+    login,
   },
   setup() {
     let data = reactive({
       // isRouterAlive: true,
     });
+    let store = useStore();
+
     // let reload = () => {
     //   data.isRouterAlive = false;
     //   nextTick(function () {
@@ -59,6 +71,7 @@ export default {
     return {
       ...toRefs(data),
       // reload,
+      store,
     };
   },
 };
@@ -83,6 +96,7 @@ export default {
   overflow: hidden;
   #top {
     background-color: #ec4141;
+    // background-color: #eb2f23;
   }
   .main {
     height: 100%;
@@ -119,5 +133,62 @@ export default {
 }
 ::-webkit-scrollbar-thumb:hover {
   background-color: #d3d3d3;
+}
+#login {
+  z-index: 2000;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  animation: fade-in; /*动画名称*/
+  animation-duration: 1.5s; /*动画持续时间*/
+  -webkit-animation: fade-in 1.5s; /*针对webkit内核*/
+}
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  } /*初始状态 透明度为0*/
+  50% {
+    opacity: 0.5;
+  } /*过渡状态 透明度为0*/
+  100% {
+    opacity: 1;
+  } /*结束状态 透明度为1*/
+}
+@-webkit-keyframes fade-in {
+  /*针对webkit内核*/
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes fade-out {
+  100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  0% {
+    opacity: 1;
+  }
+}
+@-webkit-keyframes fade-out {
+  /*针对webkit内核*/
+  100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  0% {
+    opacity: 1;
+  }
 }
 </style>

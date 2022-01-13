@@ -62,12 +62,17 @@ export default defineComponent({
 
     // let icon_click = () => {};
     let search = () => {
+      console.log("top组件中 搜索事件");
+
       router.push({ path: "/Search" });
       store.commit("changeState", { name: "searchInfo", value: data.input });
       store.dispatch("search", { type: "1" });
     };
     let login = () => {
-      console.log("dl");
+      console.log("top组件中 点击事件");
+      
+      let param = !store.state.loginState;
+      store.commit("changeState", { name: "loginState", value: param });
     };
     let vip = () => {
       console.log("vip");
@@ -99,6 +104,8 @@ export default defineComponent({
         letter-spacing: 1px;
         color: #fff;
         background-color: #e13e3e;
+        // background-color: #e1584f80;
+        // background-color: #eb2f23;
         height: 30px;
         line-height: 30px;
         padding: 10px;
@@ -140,6 +147,9 @@ export default defineComponent({
       #userName {
         color: #fbd9d9;
         margin: 0 5px;
+      }
+      #userName:hover {
+        color: #fff;
       }
       #triangle_size {
         width: 10px;

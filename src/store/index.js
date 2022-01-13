@@ -11,13 +11,18 @@ export default createStore({
     searchResult: "",//搜索    list结果
     MusicUrlInfo: "",//音乐播放地址
 
+
+
+
+
+    loginState: true,//login 登录窗口  显示状态
   },
   mutations: {
 
     changeState(state, param) {//修改任意一个state中的值
       state[param.name] = param.value
     },
-   
+
 
   },
   actions: {
