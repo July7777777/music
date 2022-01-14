@@ -1,9 +1,13 @@
 <template>
   <div class="bg"></div>
   <!-- b背景图 -->
-  <div id="login" class="12313213" v-if="store.state.loginState">
+  <div id="mask" v-if="store.state.loginState">
+    <!-- 遮罩层 -->
     <!-- 登录位置 -->
-    <login />
+    <div id="login" class="12313213">
+      <!-- 登陆组件 -->
+      <login />
+    </div>
   </div>
 
   <div id="contont">
@@ -36,7 +40,6 @@ import top from "@/components/top.vue";
 import left from "@/components/left.vue";
 import bottom from "@/components/bottom.vue";
 import login from "@/components/login.vue";
-
 import { useStore } from "vuex";
 import {
   reactive,
@@ -92,8 +95,9 @@ export default {
   height: 37.08vw;
   min-width: 666px;
   min-height: 436.6px;
-  border-radius: 2px;
+  border-radius: 3px;
   overflow: hidden;
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
   #top {
     background-color: #ec4141;
     // background-color: #eb2f23;
@@ -103,6 +107,8 @@ export default {
     display: flex;
     height: calc(100% - 110px); //还要减去底部的高度
     #left {
+      // border-right: 1px solid #d3d3d3;
+
       background-color: rgb(255, 255, 255);
       overflow: hidden;
       overflow-y: scroll;
@@ -134,7 +140,19 @@ export default {
 ::-webkit-scrollbar-thumb:hover {
   background-color: #d3d3d3;
 }
+#mask {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  font-size: 14px;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 3000;
+}
 #login {
+  // box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
   z-index: 2000;
   position: absolute;
   top: 50%;

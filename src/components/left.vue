@@ -51,19 +51,24 @@ export default {
 }
 .link_box {
   width: 100%;
+  // margin: 5px 0 5px 20px;
 }
 .link_box:hover {
   background-color: #f6f6f7;
 }
 .link {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
   display: inline-block;
-  width: 100%;
+  width: calc(100% - 20px); //减去下边padding   right  的20px
   font-size: medium;
   color: rgb(36, 36, 36);
 }
 
 .title,
 a {
+  margin: 0;
   padding: 5px 0 5px 20px;
 }
 .active {
