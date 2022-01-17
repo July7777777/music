@@ -190,12 +190,15 @@ export default defineComponent({
       p {
         font-size: 14px;
         margin: 10px;
+        // padding: 3px 5px;
         cursor: pointer;
         color: #505050;
       }
       .p_active {
         // color: #4fa5d9;
         color: #eb3023e7;
+
+        // box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
       }
     }
 
@@ -217,6 +220,11 @@ export default defineComponent({
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
       }
       #input_box {
+        box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+
+        // box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
+
         #acc {
           display: flex;
           padding: 0 20px;
@@ -224,7 +232,7 @@ export default defineComponent({
           border: 1px solid #e7e7e7;
           border-radius: 8px 8px 0 0;
           height: 35px;
-          border-bottom: none;
+          // border-bottom: none;
         }
         #password {
           position: relative;
