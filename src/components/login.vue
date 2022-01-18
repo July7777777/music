@@ -1,5 +1,5 @@
 <template>
-  <div id="login">
+  <div class="login" :class="isHiden ? 'hide' : ''">
     <div id="close">
       <!-- 关闭 -->
     </div>
@@ -13,43 +13,82 @@
           </div>
 
           <div v-if="login_way == 2">
-            <div id="input_box">
-              <div id="acc">
-                <span class="text">账 号</span>
+            <div class="input_box">
+              <div class="acc">
+                <div class="changeNum">
+                  <span class="text">账号</span>
+                </div>
                 <input type="text" placeholder="请输入163邮箱" />
+                <div class="getNum"></div>
               </div>
 
-              <div id="password">
-                <span class="text">密 码</span>
-                <input type="text" placeholder="请输入密码" />
+              <div class="password">
+                <div class="changeNum">
+                  <span class="text">密码</span>
+                </div>
+                <input
+                  type="text"
+                  placeholder="请输入密码"
+                  @blur="isHiden = false"
+                  @focus="isHiden = true"
+                />
               </div>
             </div>
           </div>
 
           <div v-if="login_way == 3">
-            <div id="input_box">
-              <div id="acc">
-                <span class="text">账 号</span>
+            <div class="input_box">
+              <div class="acc">
+                <div class="changeNum">
+                  <span class="text">账号</span>
+                </div>
                 <input type="text" placeholder="请输入手机号" />
+                <div class="getNum"></div>
               </div>
 
-              <div id="password">
-                <span class="text">密 码</span>
-                <input type="text" placeholder="请输入密码" />
+              <div class="password">
+                <div class="changeNum">
+                  <span class="text">密码</span>
+                </div>
+                <input
+                  type="text"
+                  placeholder="请输入密码"
+                  @blur="isHiden = false"
+                  @focus="isHiden = true"
+                />
               </div>
             </div>
           </div>
 
           <div v-if="login_way == 4">
-            <div id="input_box">
-              <div id="acc">
-                <span class="text">账 号</span>
+            <div class="input_box">
+              <div class="acc">
+                <div class="changeNum">
+                  <span class="text">+86</span>
+                  <div id="triangle_size">
+                    <img src="../assets/img/re_triangle.png" alt="" />
+                  </div>
+                </div>
                 <input type="text" placeholder="请输入手机号" />
+                <div
+                  class="getNum"
+                  :class="isActive ? 'getNumActive' : 'ban'"
+                  @click="getVCode"
+                >
+                  {{ verificationCodeText }}
+                </div>
               </div>
 
-              <div id="password">
-                <span class="text">验证码</span>
-                <input type="text" placeholder="请输入密码" />
+              <div class="password">
+                <div class="changeNum">
+                  <span class="text">验证码</span>
+                </div>
+                <input
+                  type="text"
+                  placeholder="请输入验证码"
+                  @blur="isHiden = false"
+                  @focus="isHiden = true"
+                />
               </div>
             </div>
           </div>
@@ -64,13 +103,17 @@
             {{ item.name }}
           </p>
         </div>
-        <div>
-          <div class="button">登录</div>
+        <div class="">
+          <p>请扫描二维码</p>
+        </div>
+        <div class="button_box">
+          <div class="button" @click="submit">登录</div>
         </div>
       </div>
       <div class="footer">
-        footer
-        <!-- footer -->
+        注意:本项目所有API均来自第三方,自行甄别 <br />
+        (地址: https://neteasecloudmusicapi.vercel.app/#/ )<br />
+        本网页不会搜集和保存用户任何信息
       </div>
     </div>
   </div>
@@ -86,8 +129,10 @@ export default defineComponent({
   name: "login",
   setup(props) {
     let data = reactive({
-      img_hide: require("../assets/img/login/hide1.jpg"),
-      img_show: require("../assets/img/login/show1.jpg"),
+      isHiden: false, //背景图片是否捂眼睛
+      verificationCodeText: "获取验证码",
+      isActive: true, //获取验证码  是否可用
+      login_way: "4", //默认登陆方式
       login_change_arr: [
         {
           name: "扫码登陆",
@@ -106,7 +151,6 @@ export default defineComponent({
           id: "4",
         },
       ],
-      login_way: "3",
     });
     let store = useStore();
     let router = useRouter();
@@ -114,9 +158,29 @@ export default defineComponent({
     //   console.log('1111')
     //   console.log("useStore", store.state.searchResultList);
     // });
+    let getVCode = () => {
+      //点击获取二维码事件
+      console.log("111");
+      if (data.isActive) {
+        data.isActive = false;
+        let i = 59;
+        data.verificationCodeText = `${i}s后重试`;
+        let time = setInterval(function () {
+          i--;
+          if (i > 0) {
+            data.verificationCodeText = `${i}s后重试`;
+          } else {
+            data.isActive = true;
+            data.verificationCodeText = `获取验证码`;
+            clearInterval(time);
+          }
+        }, 1000);
+      }
+    };
     let login_change = (e) => {
+      //点击切换登陆方式事件
       let text = "";
-      switch (e) {
+      switch (e * 1) {
         case 1:
           text = "，扫码登陆";
           break;
@@ -132,19 +196,42 @@ export default defineComponent({
         default:
           break;
       }
+      console.log(e == 1, text);
       console.log("参数为" + e + "，登陆方式为" + text);
       data.login_way = e;
     };
+    let submit = () => {
+      let e = data.login_way;
+
+      switch (e * 1) {
+        case 1:
+          text = "，扫码登陆";
+          break;
+        case 2:
+          text = "，邮箱登陆";
+          break;
+        case 3:
+          text = "，密码登陆";
+          break;
+        case 4:
+          text = "，短信登陆";
+          break;
+        default:
+          break;
+      }
+    };
     return {
       ...toRefs(data),
+      getVCode,
       login_change,
+      submit,
     };
   },
 });
 </script>
 
 <style scoped lang="less">
-#login {
+.login {
   background-color: antiquewhite;
   border-radius: 6px;
 
@@ -159,7 +246,7 @@ export default defineComponent({
 
   background-image: url(../assets/img/login/left_show.png),
     url(../assets/img/login/logo.png), url(../assets/img/login/right_show.png);
-  background-position: 0 100%, 50% 0, 100% 100%;
+  background-position: 0 100%, 50% 6px, 100% 100%;
   background-repeat: no-repeat, no-repeat, no-repeat;
   background-size: 14%;
   position: relative;
@@ -176,7 +263,12 @@ export default defineComponent({
     cursor: pointer;
   }
   #main_box {
-    // background-color: rgba(80, 97, 252);
+  }
+  .footer {
+    font-size: smaller;
+    margin-bottom: -17px;
+    color: #5050507c;
+    text-align: center;
   }
   .main {
     display: flex;
@@ -189,7 +281,7 @@ export default defineComponent({
       justify-content: center;
       p {
         font-size: 14px;
-        margin: 10px;
+        margin: 9px;
         // padding: 3px 5px;
         cursor: pointer;
         color: #505050;
@@ -203,9 +295,9 @@ export default defineComponent({
     }
 
     #login_box {
-      width: 260px;
+      // width: 260px;
       height: 100px;
-      margin: 10px 0;
+      margin: 9px 0;
       // background-color: rgb(246, 255, 127);
       display: flex;
       align-items: center;
@@ -219,22 +311,35 @@ export default defineComponent({
         // box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
       }
-      #input_box {
+      .input_box {
         box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
         border-radius: 8px;
 
         // box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
 
-        #acc {
+        .acc {
           display: flex;
           padding: 0 20px;
           align-items: center;
           border: 1px solid #e7e7e7;
+          border-bottom: none;
           border-radius: 8px 8px 0 0;
           height: 35px;
-          // border-bottom: none;
+          .getNum {
+            width: 65px;
+            padding-left: 10px;
+            border-left: 1px #e7e7e7 solid;
+          }
+          .getNumActive {
+            cursor: pointer;
+            color: #eb3023e7;
+          }
+          .ban {
+            cursor: no-drop;
+            color: silver;
+          }
         }
-        #password {
+        .password {
           position: relative;
           display: flex;
           padding: 0 20px;
@@ -244,9 +349,20 @@ export default defineComponent({
           border-radius: 0 0 8px 8px;
           height: 35px;
         }
+        .changeNum {
+          width: 50px;
+          margin-right: 10px;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          #triangle_size {
+            width: 14px;
+            height: 8px;
+          }
+        }
         .text {
           white-space: normal;
-          margin-right: 20px;
+          // margin-right: 20px;
           font-size: 14px;
           color: #212121;
         }
@@ -266,7 +382,7 @@ export default defineComponent({
           // border: none;
           // outline: none;
 
-          width: 150px;
+          width: 160px;
           outline: none;
           border: none;
           font-size: 14px;
@@ -292,6 +408,9 @@ export default defineComponent({
         }
       }
     }
+    .button_box {
+      margin: 10px;
+    }
     .button {
       box-sizing: border-box;
       width: 100px;
@@ -307,7 +426,10 @@ export default defineComponent({
     }
   }
 }
-
+.hide {
+  background-image: url(../assets/img/login/left_hide.png),
+    url(../assets/img/login/logo.png), url(../assets/img/login/right_hide.png);
+}
 .flex {
   display: flex;
   align-items: center;
