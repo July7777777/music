@@ -63,10 +63,16 @@
           <div v-if="login_way == 4">
             <div class="input_box">
               <div class="acc">
-                <div class="changeNum">
+                <div class="changeNum" id="ITC">
                   <span class="text">+86</span>
                   <div id="triangle_size">
                     <img src="../assets/img/re_triangle.png" alt="" />
+                  </div>
+                  <div class="ITCode">
+                    <div>
+                      <span>+86</span>
+                      <span>中国</span>
+                    </div>
                   </div>
                 </div>
                 <input type="text" placeholder="请输入手机号" />
@@ -103,17 +109,16 @@
             {{ item.name }}
           </p>
         </div>
-        <div class="">
-          <p>请扫描二维码</p>
+        <div class="reminder">
+          <p>{{ reminder }}</p>
         </div>
         <div class="button_box">
           <div class="button" @click="submit">登录</div>
         </div>
       </div>
       <div class="footer">
-        注意:本项目所有API均来自第三方,自行甄别 <br />
-        (地址: https://neteasecloudmusicapi.vercel.app/#/ )<br />
-        本网页不会搜集和保存用户任何信息
+        注意:本项目仅用于学习使用，不得用于任何商业用途 <br />
+        请于下载24h内删除
       </div>
     </div>
   </div>
@@ -151,6 +156,7 @@ export default defineComponent({
           id: "4",
         },
       ],
+      reminder: "", //提醒信息
     });
     let store = useStore();
     let router = useRouter();
@@ -198,14 +204,15 @@ export default defineComponent({
       }
       console.log(e == 1, text);
       console.log("参数为" + e + "，登陆方式为" + text);
+      data.reminder = "";
       data.login_way = e;
     };
     let submit = () => {
       let e = data.login_way;
-
+      let text = "";
       switch (e * 1) {
         case 1:
-          text = "，扫码登陆";
+          text = "*请用手机网易云app扫码登录";
           break;
         case 2:
           text = "，邮箱登陆";
@@ -219,6 +226,7 @@ export default defineComponent({
         default:
           break;
       }
+      data.reminder = text;
     };
     return {
       ...toRefs(data),
@@ -360,6 +368,18 @@ export default defineComponent({
             height: 8px;
           }
         }
+        #ITC {
+          cursor: pointer;
+          position: relative;
+          .ITCode {
+            width: 222px;
+            height: 170px;
+            z-index: 3000;
+            background-color: #505050;
+            position: absolute;
+            top: 27px;
+          }
+        }
         .text {
           white-space: normal;
           // margin-right: 20px;
@@ -407,6 +427,14 @@ export default defineComponent({
           font-size: 13px;
         }
       }
+    }
+    .reminder {
+      height: 17px;
+      line-height: 17px;
+      color: #eb3023e7;
+
+      font-size: 12px;
+      transform: scale(0.9);
     }
     .button_box {
       margin: 10px;
