@@ -1,6 +1,6 @@
 <template>
   <div class="login" :class="isHiden ? 'hide' : ''">
-    <div id="close">
+    <div id="close" @click="close">
       <!-- 关闭 -->
     </div>
     <div id="main_box">
@@ -63,17 +63,30 @@
           <div v-if="login_way == 4">
             <div class="input_box">
               <div class="acc">
-                <div class="changeNum" id="ITC">
-                  <span class="text">+86</span>
-                  <div id="triangle_size">
-                    <img src="../assets/img/re_triangle.png" alt="" />
-                  </div>
-                  <div class="ITCode">
-                    <div>
-                      <span>+86</span>
-                      <span>中国</span>
+                <div id="ITC">
+                  <div class="changeNum" @click="ulCode = !ulCode">
+                    <span class="text">{{ phoneCode }}</span>
+                    <div id="triangle_size">
+                      <img src="../assets/img/re_triangle.png" alt="" />
                     </div>
                   </div>
+                  <ul class="ITCode" v-if="ulCode">
+                    <li
+                      class="ITCodeitem"
+                      v-for="(item, index) in CountryCode"
+                      :key="index"
+                      @click="CodeChose(item)"
+                    >
+                      <span
+                        class="phoneCode"
+                        :class="
+                          phoneCode == item.phoneCode ? 'phoneCodeActive' : ''
+                        "
+                        >{{ item.phoneCode }}</span
+                      >
+                      <span class="countryName">{{ item.countryName }}</span>
+                    </li>
+                  </ul>
                 </div>
                 <input type="text" placeholder="请输入手机号" />
                 <div
@@ -129,6 +142,9 @@
 import { useStore } from "vuex";
 import { reactive, onMounted, defineComponent, toRefs } from "vue";
 import { useRouter } from "vue-router";
+// import { CountryCode } from "../assets/js/CountryCode";
+import { CountryCode } from "../assets/js/cod";
+import { cellphone } from "../request/api";
 
 export default defineComponent({
   name: "login",
@@ -138,6 +154,8 @@ export default defineComponent({
       verificationCodeText: "获取验证码",
       isActive: true, //获取验证码  是否可用
       login_way: "4", //默认登陆方式
+      phoneCode: "+86",
+      ulCode: false,
       login_change_arr: [
         {
           name: "扫码登陆",
@@ -160,10 +178,25 @@ export default defineComponent({
     });
     let store = useStore();
     let router = useRouter();
-    // onMounted(() => {
-    //   console.log('1111')
-    //   console.log("useStore", store.state.searchResultList);
-    // });
+    onMounted(() => {
+      console.log("1111");
+      console.log("useStore", store.state.searchResultList);
+      console.log(CountryCode);
+    });
+    let close = () => {
+      console.log("top组件中 点击事件");
+
+      let param = !store.state.loginState;
+      store.commit("changeState", { name: "loginState", value: param });
+    };
+    let CodeChose = (e) => {
+      console.log("CodeChose", e);
+      data.ulCode = false;
+      data.phoneCode = e.phoneCode;
+      // let param = !store.state.loginState;
+      // store.commit("changeState", { name: "loginState", value: param });
+    };
+
     let getVCode = () => {
       //点击获取二维码事件
       console.log("111");
@@ -207,6 +240,21 @@ export default defineComponent({
       data.reminder = "";
       data.login_way = e;
     };
+    let cellphone = (e) => {
+      let data = {
+        phone: "",
+        md5_password: "",
+        captcha: "",
+      };
+      cellphone(data)
+        .then((res) => {
+          console.log(res);
+          console.log(res.result);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
     let submit = () => {
       let e = data.login_way;
       let text = "";
@@ -233,12 +281,20 @@ export default defineComponent({
       getVCode,
       login_change,
       submit,
+      close,
+      CodeChose,
+      CountryCode,
     };
   },
 });
 </script>
 
 <style scoped lang="less">
+#main_box {
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10+ and Edge */
+  user-select: none; /* Standard syntax */
+}
 .login {
   background-color: antiquewhite;
   border-radius: 6px;
@@ -269,8 +325,6 @@ export default defineComponent({
       no-repeat;
     background-size: cover;
     cursor: pointer;
-  }
-  #main_box {
   }
   .footer {
     font-size: smaller;
@@ -358,8 +412,8 @@ export default defineComponent({
           height: 35px;
         }
         .changeNum {
-          width: 50px;
-          margin-right: 10px;
+          width: 60px;
+          margin-right: 5px;
           display: flex;
           align-items: center;
           justify-content: space-between;
@@ -372,12 +426,34 @@ export default defineComponent({
           cursor: pointer;
           position: relative;
           .ITCode {
-            width: 222px;
+            width: 239px;
             height: 170px;
             z-index: 3000;
-            background-color: #505050;
+            background-color: #fff;
             position: absolute;
+            left: -10px;
             top: 27px;
+            overflow: auto;
+            box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+            .ITCodeitem {
+              padding: 5px 10px;
+              .phoneCode {
+                color: rgb(97, 97, 97);
+                font-size: 13px;
+              }
+              .phoneCodeActive {
+                color: #eb3023e7;
+                font-weight: bold;
+              }
+              .countryName {
+                float: right;
+                color: rgb(132, 146, 166);
+                font-size: 13px;
+              }
+            }
+            .ITCodeitem:hover {
+              background-color: #f5f7fa;
+            }
           }
         }
         .text {

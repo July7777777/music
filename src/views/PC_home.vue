@@ -167,9 +167,7 @@ export default {
   0% {
     opacity: 0;
   } /*初始状态 透明度为0*/
-  50% {
-    opacity: 0.5;
-  } /*过渡状态 透明度为0*/
+
   100% {
     opacity: 1;
   } /*结束状态 透明度为1*/
@@ -179,9 +177,7 @@ export default {
   0% {
     opacity: 0;
   }
-  50% {
-    opacity: 0.5;
-  }
+
   100% {
     opacity: 1;
   }
@@ -190,9 +186,7 @@ export default {
   100% {
     opacity: 0;
   }
-  50% {
-    opacity: 0.5;
-  }
+
   0% {
     opacity: 1;
   }
@@ -202,9 +196,7 @@ export default {
   100% {
     opacity: 0;
   }
-  50% {
-    opacity: 0.5;
-  }
+
   0% {
     opacity: 1;
   }

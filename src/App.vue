@@ -16,4 +16,16 @@
     align-items: center;
   }
 }
+// 全局滚动条样式
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background: #e0e0e0;
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: #d3d3d3;
+}
 </style>
